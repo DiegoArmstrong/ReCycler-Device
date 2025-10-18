@@ -1,0 +1,4 @@
+../rc_i2c/Src/rc_i2c_driver.cpp:16:1:I2cDriver::I2cDriver(I2C_HandleTypeDef*)	16	static
+../rc_i2c/Src/rc_i2c_driver.cpp:20:26:HAL_StatusTypeDef retrieveI2cAddressFromDevice(I2cBusDevices_e, uint16_t&)	24	static
+../rc_i2c/Src/rc_i2c_driver.cpp:41:19:HAL_StatusTypeDef I2cDriver::init()	16	static
+../rc_i2c/Src/rc_i2c_driver.cpp:51:19:HAL_StatusTypeDef I2cDriver::writeI2cData(I2cBusDevices_e, uint8_t*, uint16_t)	40	static

@@ -1,0 +1,29 @@
+# STM32CubeIDE / Eclipse metadata
+.metadata/
+.settings/
+.mxproject
+*.launch
+
+# Build artifacts
+/Debug/
+/Release/
+build/
+*.o
+*.elf
+*.bin
+*.hex
+*.map
+
+# Logs and temporary files
+*.log
+*.bak
+*.tmp
+*.swp
+
+# VSCode project files (optional)
+.vscode/
+.idea/
+
+# System files
+.DS_Store
+Thumbs.db

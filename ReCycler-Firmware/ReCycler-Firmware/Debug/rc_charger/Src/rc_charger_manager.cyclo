@@ -1,0 +1,2 @@
+../rc_charger/Src/rc_charger_manager.cpp:15:1:ChargerManager::ChargerManager()	1
+../rc_charger/Src/rc_charger_manager.cpp:21:19:HAL_StatusTypeDef ChargerManager::init()	1
