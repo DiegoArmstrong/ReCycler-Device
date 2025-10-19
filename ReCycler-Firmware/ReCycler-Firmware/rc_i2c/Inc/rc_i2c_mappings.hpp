@@ -20,4 +20,5 @@ typedef struct {
 
 extern const DeviceToI2cAddress_t deviceToI2cAddressLut[];
 
+
 #endif /* INC_RC_I2C_MAPPINGS_HPP_ */

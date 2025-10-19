@@ -8,9 +8,21 @@
 #ifndef INC_RC_CHARGER_DRIVER_HPP_
 #define INC_RC_CHARGER_DRIVER_HPP_
 
+#include "../../rc_util/Inc/rc_data_types.hpp"
+
+/*!
+* A type mapping a Charging IC's 8-bit I2C register to the register address.
+*/
+typedef struct {
+    Charger8BitI2cRegisters_e chargerRegister;  /* The charger register with a corresponding address. */
+    uint16_t registerAddress;                   /* The corresponding address. */
+} ChargerRegisterToAddress_t;
+
+extern const ChargerRegisterToAddress_t chargerRegisterToAddress[];
+
 /*
- * @brief   typedef enabling Input Source Control Register bit access.
- */
+* @brief   typedef enabling Input Source Control Register bit access.
+*/
 typedef union {
 
     struct {
@@ -23,8 +35,8 @@ typedef union {
 } InputSourceControlReg_t;
 
 /*
- * @brief   typedef enabling Power On Config Register bit access.
- */
+* @brief   typedef enabling Power On Config Register bit access.
+*/
 typedef union {
 
     struct {
@@ -39,8 +51,8 @@ typedef union {
 } PowerOnConfigReg_t;
 
 /*
- * @brief   typedef enabling Charge Current Control Register bit access.
- */
+* @brief   typedef enabling Charge Current Control Register bit access.
+*/
 typedef union {
 
     struct {
@@ -53,8 +65,8 @@ typedef union {
 } ChargeCurrentControlReg_t;
 
 /*
- * @brief   typedef enabling Pre Charge Current Control Register bit access.
- */
+* @brief   typedef enabling Pre Charge Current Control Register bit access.
+*/
 typedef union {
 
     struct {
@@ -66,8 +78,8 @@ typedef union {
 } PreChargeCurrentControlReg_t;
 
 /*
- * @brief   typedef enabling Charge Voltage Control Register bit access.
- */
+* @brief   typedef enabling Charge Voltage Control Register bit access.
+*/
 typedef union {
 
     struct {
@@ -80,8 +92,8 @@ typedef union {
 } ChargeVoltageControl_t;
 
 /*
- * @brief   typedef enabling Charge Termination Control Register bit access.
- */
+* @brief   typedef enabling Charge Termination Control Register bit access.
+*/
 typedef union {
 
     struct {
@@ -97,8 +109,8 @@ typedef union {
 } ChargeTerminationControlReg_t;
 
 /*
- * @brief   typedef enabling Thermal Regulation Control Register bit access.
- */
+* @brief   typedef enabling Thermal Regulation Control Register bit access.
+*/
 typedef union {
 
     struct {
@@ -110,8 +122,8 @@ typedef union {
 } ThermalRegulationControlReg_t;
 
 /*
- * @brief   typedef enabling System Status Register bit access.
- */
+* @brief   typedef enabling System Status Register bit access.
+*/
 typedef union {
 
     struct {
@@ -126,8 +138,8 @@ typedef union {
 } SystemStatusReg_t;
 
 /*
- * @brief   typedef enabling Fault Register bit access.
- */
+* @brief   typedef enabling Fault Register bit access.
+*/
 typedef union {
 
     struct {
@@ -140,5 +152,20 @@ typedef union {
     uint8_t raw;
 
 } FaultReg_t;
+
+class ChargerDriver {
+public: 
+
+	/*!
+	 * Default Constructor.
+	 */
+	ChargerDriver();
+
+    /*
+    * @brief    Writes to the Input Source Control Register.
+    */
+   HAL_StatusTypeDef writeInputSrcCtrlReg(uint8_t data);
+
+};
 
 #endif /* INC_RC_CHARGER_DRIVER_HPP_ */

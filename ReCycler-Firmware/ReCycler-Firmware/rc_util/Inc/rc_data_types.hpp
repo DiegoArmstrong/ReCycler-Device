@@ -32,6 +32,21 @@ typedef enum {
 	I2C_BUS_DEVICE_MAX,
 } I2cBusDevices_e;
 
+/*!
+ * An enumeration describing the different I2C registers on the Charger IC.
+ */
+typedef enum {
+    INPUT_SOURCE_CONTROL_REG,
+    POWER_ON_CONFIG_REG,
+    CHARGE_CURRENT_CONTROL_REG,
+    PRECHARGE_CURRENT_CONTROL_REG,
+    CHARGE_VOLTAGE_CONTROL_REG,
+    CHARGE_TERMINATION_CONTROL_REG,
+    THERMAL_REGULATION_CONTROL_REG,
+    SYSTEM_STATUS_REG,
+    FAULT_REG,
 
+    REGISTER_MAX,
+} Charger8BitI2cRegisters_e;
 
 #endif /* INC_RC_DATA_TYPES_HPP_ */
