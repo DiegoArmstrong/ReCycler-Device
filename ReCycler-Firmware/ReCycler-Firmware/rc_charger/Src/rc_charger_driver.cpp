@@ -33,6 +33,9 @@ static HAL_StatusTypeDef retrieveAddressFromChargerRegister(Charger8BitI2cRegist
         }
         lutIndex++;
     }
+    if(chargerRegisterToAddress[lutIndex].chargerRegister == REGISTER_MAX) {
+        return HAL_ERROR;
+    }
 
     return HAL_OK;
 }
@@ -41,16 +44,26 @@ static HAL_StatusTypeDef retrieveAddressFromChargerRegister(Charger8BitI2cRegist
 /*!
  * Default Constructor.
  */
-ChargerDriver::ChargerDriver() {}
+ChargerDriver::ChargerDriver() : i2cDriverPtr_(nullptr) {}
 
 /*
  * @brief    Writes to the Input Source Control Register.
  */
 HAL_StatusTypeDef ChargerDriver::writeInputSrcCtrlReg(uint8_t data) {
     HAL_StatusTypeDef ret = HAL_OK;
+    uint16_t regAddress = 0U;
 
+    /* Retrieve the register address. */
+    ret = retrieveAddressFromChargerRegister(INPUT_SOURCE_CONTROL_REG, regAddress);
+    if(ret != HAL_OK) {
+        return ret;
+    }
 
-
+    /* Write the data to the register. */
+    ret = i2cDriverPtr_->writeI2cReg8(I2C_BUS_DEVICE_CHARGER_IC, regAddress, sizeof(regAddress), &data, sizeof(data));
+    if(ret != HAL_OK) {
+        return ret;
+    }
 
     return HAL_OK;
 }

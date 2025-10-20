@@ -27,14 +27,24 @@ public:
 	HAL_StatusTypeDef init();
 
 	/*!
-	 *  Writes data to the selected I2C device.
+	 *  @brief  Writes data to the selected I2C device.
 	 */
 	HAL_StatusTypeDef writeI2cData(I2cBusDevices_e device, uint8_t *data, uint16_t dataLen);
 
     /*!
-     * Writes data to a the selected I2C device's 8-bit register. 
+     * @brief   Writes data to a the selected I2C device's 8-bit register. 
      */
     HAL_StatusTypeDef writeI2cReg8(I2cBusDevices_e device, uint16_t registerAddress, uint16_t registerAddressSize, uint8_t *data, uint16_t dataLen);
+
+    /*!
+     * @brief   Reads data from the selected I2C device.
+     */
+    HAL_StatusTypeDef readI2cData(I2cBusDevices_e device, uint8_t *data, uint16_t dataLen);
+
+    /*!
+     * @brief   Reads data from the selected I2C device's 8-bit register. 
+     */
+    HAL_StatusTypeDef readI2cReg8(I2cBusDevices_e device, uint16_t registerAddress, uint16_t registerAddressSize, uint8_t *data, uint16_t dataLen);
 
 
 

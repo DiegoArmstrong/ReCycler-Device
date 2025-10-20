@@ -9,6 +9,7 @@
 #define INC_RC_CHARGER_DRIVER_HPP_
 
 #include "../../rc_util/Inc/rc_data_types.hpp"
+#include "../../rc_i2c/Inc/rc_i2c_driver.hpp"
 
 /*!
 * A type mapping a Charging IC's 8-bit I2C register to the register address.
@@ -165,6 +166,9 @@ public:
     * @brief    Writes to the Input Source Control Register.
     */
    HAL_StatusTypeDef writeInputSrcCtrlReg(uint8_t data);
+
+private:
+    I2cDriver *i2cDriverPtr_;       /* The Charger Driver's I2C driver object. */
 
 };
 

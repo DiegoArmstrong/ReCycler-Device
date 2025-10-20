@@ -85,7 +85,7 @@ HAL_StatusTypeDef I2cDriver::writeI2cReg8(I2cBusDevices_e device, uint16_t regis
 	}
 
     /* Transmit the data to the 8-bit register. */
-    ret = HAL_I2C_Mem_Write(halI2c_, deviceAddress, registerAddress, sizeof(registerAddress), data, dataLen, I2C_COMMS_TIMEOUT_DEFAULT);
+    ret = HAL_I2C_Mem_Write(halI2c_, deviceAddress, registerAddress, registerAddressSize, data, dataLen, I2C_COMMS_TIMEOUT_DEFAULT);
     if(ret != HAL_OK) {
         return ret;
     }
@@ -94,6 +94,51 @@ HAL_StatusTypeDef I2cDriver::writeI2cReg8(I2cBusDevices_e device, uint16_t regis
 }
 
 
+/*!
+ * @brief   Reads data from the selected I2C device.
+ */
+HAL_StatusTypeDef I2cDriver::readI2cData(I2cBusDevices_e device, uint8_t *data, uint16_t dataLen) {
+    HAL_StatusTypeDef ret = HAL_OK;
+
+    uint16_t deviceAddress = 0U;
+
+	/* Retrieve the device's I2C address. */
+	ret = retrieveI2cAddressFromDevice(device, deviceAddress);
+	if(ret != HAL_OK) {
+		return ret;
+	}
+
+    /* Receive data from the device over I2C. */
+    HAL_I2C_Master_Receive(halI2c_, deviceAddress, data, dataLen, I2C_COMMS_TIMEOUT_DEFAULT);
+    if(ret != HAL_OK) {
+        return ret;
+    }
+
+    return HAL_OK;
+}
+
+/*!
+ * @brief   Reads data from the selected I2C device's 8-bit register. 
+ */
+HAL_StatusTypeDef I2cDriver::readI2cReg8(I2cBusDevices_e device, uint16_t registerAddress, uint16_t registerAddressSize, uint8_t *data, uint16_t dataLen) {
+    HAL_StatusTypeDef ret = HAL_OK;
+
+    uint16_t deviceAddress = 0U;
+
+	/* Retrieve the device's I2C address. */
+	ret = retrieveI2cAddressFromDevice(device, deviceAddress);
+	if(ret != HAL_OK) {
+		return ret;
+	}
+
+    /* Receive the data to the 8-bit register. */
+    ret = HAL_I2C_Mem_Read(halI2c_, deviceAddress, registerAddress, registerAddressSize, data, dataLen, I2C_COMMS_TIMEOUT_DEFAULT);
+    if(ret != HAL_OK) {
+        return ret;
+    }
+
+    return HAL_OK;
+}
 
 
 
