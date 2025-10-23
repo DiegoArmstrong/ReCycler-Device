@@ -35,17 +35,6 @@ static HAL_StatusTypeDef retrieveI2cAddressFromDevice(I2cBusDevices_e device, ui
 	return HAL_OK;
 }
 
-
-/*!
- * @brief	Initializes the I2C Driver.
- */
-HAL_StatusTypeDef I2cDriver::init() {
-
-
-
-	return HAL_OK;
-}
-
 /*!
  *  Writes data to the selected I2C device.
  */
@@ -68,7 +57,6 @@ HAL_StatusTypeDef I2cDriver::writeI2cData(I2cBusDevices_e device, uint8_t *data,
 
 	return HAL_OK;
 }
-
 
 /*!
  * Writes data to a the selected I2C device's 8-bit register. 

@@ -163,9 +163,14 @@ public:
 	ChargerDriver();
 
     /*
-    * @brief    Writes to the Input Source Control Register.
-    */
+     * @brief    Writes to the Input Source Control Register.
+     */
    HAL_StatusTypeDef writeInputSrcCtrlReg(uint8_t data);
+
+    /*
+     * @brief   Reads data from the Input Source Control Register. 
+     */
+   HAL_StatusTypeDef readInputSrcCtrlReg(uint8_t &data);
 
 private:
     I2cDriver *i2cDriverPtr_;       /* The Charger Driver's I2C driver object. */
