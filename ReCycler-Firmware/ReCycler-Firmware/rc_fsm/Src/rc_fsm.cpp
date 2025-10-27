@@ -14,7 +14,10 @@
 /*!
  * Default Constructor.
  */
-ReCyclerFSM::ReCyclerFSM() : rcState_(RC_STATE_INIT), chargerManager_() {}
+ReCyclerFSM::ReCyclerFSM(ChargerManager *chargerManager)
+    : chargerManager_(chargerManager)
+    , rcState_(RC_STATE_INIT)
+{}
 
 /*!
  * @brief	Starts the ReCycler's FSM.
@@ -43,7 +46,12 @@ HAL_StatusTypeDef ReCyclerFSM::rcFsmStart() {
 		case RC_STATE_FAULT:
 			rcFsmStateFault();
 			break;
+
+		case RC_STATE_MAX:
+			return HAL_ERROR;
 		}
+
+
 
 	} while(FOREVER);
 }
@@ -56,7 +64,12 @@ HAL_StatusTypeDef ReCyclerFSM::rcFsmStateInit() {
 	HAL_StatusTypeDef ret = HAL_OK;
 
 	/* Initialize the Charger Manager. */
-	ret = chargerManager_.init();
+	ret = chargerManager_->init();
+	if(ret != HAL_OK) {
+		return ret;
+	}
+
+	ret = chargerManager_->testI2cDriverFunc();
 	if(ret != HAL_OK) {
 		return ret;
 	}

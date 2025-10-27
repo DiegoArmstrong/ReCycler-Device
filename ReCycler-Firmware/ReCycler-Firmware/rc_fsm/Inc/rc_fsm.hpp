@@ -20,7 +20,7 @@ public:
 	/*!
 	 * Default Constructor.  
      */ 
-    ReCyclerFSM(); 
+    explicit ReCyclerFSM(ChargerManager *chargerManager);
      
     /*!
      * @brief	Starts the ReCycler's FSM.
@@ -52,13 +52,9 @@ public:
 	 */
 	HAL_StatusTypeDef rcFsmStateFault();
 
-
-
-
 private:
-	RcState_e rcState_;					/*!< The state of the ReCycler. */
-
-	ChargerManager chargerManager_;		/* The ReCycler FSM's Charger Manager object. */
+	ChargerManager *chargerManager_;		/* The ReCycler FSM's Charger Manager object. */
+	RcState_e rcState_{RC_STATE_INIT};					/*!< The state of the ReCycler. */
 };
 
 
