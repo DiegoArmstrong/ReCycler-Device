@@ -43,6 +43,11 @@ HAL_StatusTypeDef I2cDriver::writeI2cData(I2cBusDevices_e device, uint8_t *data,
 
 	uint16_t address = 0U;
 
+    /* Validate the data pointer. */
+    if(data == nullptr) {
+        return HAL_ERROR;
+    }
+
 	/* Retrieve the device's I2C address. */
 	ret = retrieveI2cAddressFromDevice(device, address);
 	if(ret != HAL_OK) {
@@ -65,6 +70,11 @@ HAL_StatusTypeDef I2cDriver::writeI2cReg8(I2cBusDevices_e device, uint16_t regis
     HAL_StatusTypeDef ret = HAL_OK;
 
     uint16_t deviceAddress = 0U;
+
+    /* Validate the data pointer. */
+    if(data == nullptr) {
+        return HAL_ERROR;
+    }
 
 	/* Retrieve the device's I2C address. */
 	ret = retrieveI2cAddressFromDevice(device, deviceAddress);
@@ -90,6 +100,11 @@ HAL_StatusTypeDef I2cDriver::readI2cData(I2cBusDevices_e device, uint8_t *data, 
 
     uint16_t deviceAddress = 0U;
 
+    /* Validate the data pointer. */
+    if(data == nullptr) {
+        return HAL_ERROR;
+    }
+
 	/* Retrieve the device's I2C address. */
 	ret = retrieveI2cAddressFromDevice(device, deviceAddress);
 	if(ret != HAL_OK) {
@@ -113,6 +128,11 @@ HAL_StatusTypeDef I2cDriver::readI2cReg8(I2cBusDevices_e device, uint16_t regist
 
     uint16_t deviceAddress = 0U;
 
+    /* Validate the data pointer. */
+    if(data == nullptr) {
+        return HAL_ERROR;
+    }
+
 	/* Retrieve the device's I2C address. */
 	ret = retrieveI2cAddressFromDevice(device, deviceAddress);
 	if(ret != HAL_OK) {
@@ -127,9 +147,3 @@ HAL_StatusTypeDef I2cDriver::readI2cReg8(I2cBusDevices_e device, uint16_t regist
 
     return HAL_OK;
 }
-
-
-
-
-
-
