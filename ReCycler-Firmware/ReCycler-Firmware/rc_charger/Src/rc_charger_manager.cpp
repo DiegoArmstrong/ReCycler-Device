@@ -12,8 +12,9 @@
 /*!
  * Default Constructor.
  */
-ChargerManager::ChargerManager() {}
-
+ChargerManager::ChargerManager(ChargerDriver *chargerDriver)
+	: chargerDriver_(chargerDriver)
+{}
 
 /*
  * @brief	Initializes the Charger Manager and the Charger Driver.
@@ -26,5 +27,34 @@ HAL_StatusTypeDef ChargerManager::init() {
 
 
 	return HAL_OK;
+}
+
+HAL_StatusTypeDef ChargerManager::testI2cDriverFunc() {
+    HAL_StatusTypeDef ret = HAL_OK;
+
+    InputSourceControlReg_t inputSourceControlByte = {};
+
+    inputSourceControlByte.inputCurrentLimit = 0b010;
+    inputSourceControlByte.inputVoltageLimit = 0b0110;
+    inputSourceControlByte.enable = 1;
+
+    ret = chargerDriver_->writeInputSrcCtrlReg(inputSourceControlByte.raw);
+    if(ret != HAL_OK) {
+    	return ret;
+    }
+
+    inputSourceControlByte = {};
+
+    ret = chargerDriver_->readInputSrcCtrlReg(inputSourceControlByte.raw);
+    if(ret != HAL_OK) {
+    	return ret;
+    }
+
+    if(inputSourceControlByte.raw != 0b01001101) {
+    	return ret;
+    }
+
+
+    return HAL_OK;
 }
 

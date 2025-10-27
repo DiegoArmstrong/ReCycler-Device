@@ -18,14 +18,18 @@ public:
 	/*!
 	 * Default Constructor.
 	 */
-	ChargerManager();
+	explicit ChargerManager(ChargerDriver *chargerDriver);
 
 	/*
 	 * @brief	Initializes the Charger Manager.
 	 */
 	HAL_StatusTypeDef init();
 
+	HAL_StatusTypeDef testI2cDriverFunc();
 
+
+private:
+    ChargerDriver *chargerDriver_{nullptr};   /* The charger manager's charger driver object. */
 
 };
 

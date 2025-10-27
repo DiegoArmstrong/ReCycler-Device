@@ -17,6 +17,9 @@ I2cDriver::I2cDriver(I2C_HandleTypeDef *i2cBusHandler) {
 	halI2c_ = i2cBusHandler;
 }
 
+/*!
+ *	@brief	Retrieves an I2C device address from a I2C Bus Device enum.
+ */
 static HAL_StatusTypeDef retrieveI2cAddressFromDevice(I2cBusDevices_e device, uint16_t &address) {
 	uint16_t lutIndex = 0U;
 
@@ -90,7 +93,6 @@ HAL_StatusTypeDef I2cDriver::writeI2cReg8(I2cBusDevices_e device, uint16_t regis
 
     return HAL_OK;
 }
-
 
 /*!
  * @brief   Reads data from the selected I2C device.

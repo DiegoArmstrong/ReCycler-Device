@@ -23,6 +23,8 @@
 /* USER CODE BEGIN Includes */
 #include "../../rc_fsm/Inc/rc_fsm.hpp"
 #include "../../rc_i2c/Inc/rc_i2c_driver.hpp"
+#include "../../rc_charger/Inc/rc_charger_driver.hpp"
+#include "../../rc_charger/Inc/rc_charger_manager.hpp"
 #include <cstdio>
 
 /* USER CODE END Includes */
@@ -110,7 +112,10 @@ int main(void)
   /* USER CODE BEGIN 2 */
 
   I2cDriver i2cDriver(&hi2c1);
-  ReCyclerFSM reCyclerFsm;
+  ChargerDriver chargerDriver(&i2cDriver);
+  ChargerManager chargerManager(&chargerDriver);
+
+  ReCyclerFSM reCyclerFsm(&chargerManager);
 
   /* USER CODE END 2 */
 

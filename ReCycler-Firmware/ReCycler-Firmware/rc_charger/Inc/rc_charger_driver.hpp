@@ -160,7 +160,7 @@ public:
 	/*!
 	 * Default Constructor.
 	 */
-	ChargerDriver();
+	explicit ChargerDriver(I2cDriver *i2cDriver);
 
     /*
      * @brief    Writes to the Input Source Control Register.
@@ -173,7 +173,7 @@ public:
    HAL_StatusTypeDef readInputSrcCtrlReg(uint8_t &data);
 
 private:
-    I2cDriver *i2cDriverPtr_;       /* The Charger Driver's I2C driver object. */
+    I2cDriver *i2cDriver_;       /* The Charger Driver's I2C driver object. */
 
 };
 
